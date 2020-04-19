@@ -17301,7 +17301,7 @@ var app = (function () {
     }());
     //# sourceMappingURL=PDFDocument.js.map
 
-    // import QRCode from 'qrcode'
+    // import QRCode from 'qrcode';
 
     function idealFontSize(font, text, maxWidth, minSize, defaultSize) {
       let currentSize = defaultSize;
@@ -17314,19 +17314,6 @@ var app = (function () {
 
     function drawText(page, font, text, x, y, size = 11) {
       page.drawText(text || '', { x, y, size, font });
-    }
-
-    async function generateQR(text) {
-      try {
-        return await QRCode.toDataURL(text, {
-          errorCorrectionLevel: "M",
-          type: "image/png",
-          quality: 0.92,
-          margin: 1
-        });
-      } catch (err) {
-        console.error(err);
-      }
     }
 
     async function generatePdf(profile, settings) {
@@ -17378,24 +17365,24 @@ var app = (function () {
         `Sortie: ${creationDate} a ${creationHour}`,
         `Motif: ${settings.selectedReason.shortText}`
       ].join("; ");
-      const generatedQR = await generateQR(dataForQrCode);
-      const qrImage = await pdfDoc.embedPng(generatedQR);
-      page1.drawImage(qrImage, {
-        x: page1.getWidth() - 170,
-        y: 155,
-        width: 100,
-        height: 100
-      });
+      // const generatedQR = await generateQR(dataForQrCode);
+      // const qrImage = await pdfDoc.embedPng(generatedQR);
+      // page1.drawImage(qrImage, {
+      //   x: page1.getWidth() - 170,
+      //   y: 155,
+      //   width: 100,
+      //   height: 100
+      // });
 
-      pdfDoc.addPage();
+      // pdfDoc.addPage();
 
-      const page2 = pdfDoc.getPages()[1];
-      page2.drawImage(qrImage, {
-        x: 50,
-        y: page2.getHeight() - 350,
-        width: 300,
-        height: 300
-      });
+      // const page2 = pdfDoc.getPages()[1];
+      // page2.drawImage(qrImage, {
+      //   x: 50,
+      //   y: page2.getHeight() - 350,
+      //   width: 300,
+      //   height: 300
+      // });
 
       const pdfBytes = await pdfDoc.save();
 
