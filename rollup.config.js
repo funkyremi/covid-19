@@ -8,7 +8,14 @@ import json from "rollup-plugin-json";
 
 const production = !process.env.ROLLUP_WATCH;
 
+function onwarn(warning) {
+  if (warning.code !== 'CIRCULAR_DEPENDENCY') {
+      console.error(`(!) ${warning.message}`);
+  }
+}
+
 export default {
+  onwarn,
   input: "src/main.js",
   external: ["moment"],
   output: {

@@ -687,7 +687,6 @@ var app = (function () {
         var data = trimmedUri.substring(fullMatch.length);
         return decodeFromBase64(data);
     };
-    //# sourceMappingURL=base64.js.map
 
     var toCharCode = function (character) { return character.charCodeAt(0); };
     var toCodePoint = function (character) { return character.codePointAt(0); };
@@ -761,7 +760,6 @@ var app = (function () {
         pushCurrLine();
         return lines;
     };
-    //# sourceMappingURL=strings.js.map
 
     var last = function (array) { return array[array.length - 1]; };
     var typedArrayFor = function (value) {
@@ -886,7 +884,6 @@ var app = (function () {
             throw new TypeError('`input` must be one of `string | ArrayBuffer | Uint8Array`');
         }
     };
-    //# sourceMappingURL=arrays.js.map
 
     /**
      * Returns a Promise that resolves after at least one tick of the
@@ -897,7 +894,6 @@ var app = (function () {
             setTimeout(function () { return resolve(); }, 0);
         });
     };
-    //# sourceMappingURL=async.js.map
 
     /**
      * Encodes a string to UTF-16.
@@ -1017,7 +1013,6 @@ var app = (function () {
     var lowSurrogate = function (codePoint) {
         return ((codePoint - 0x10000) % 0x400) + 0xdc00;
     };
-    //# sourceMappingURL=unicode.js.map
 
     // tslint:disable radix
     /**
@@ -1072,12 +1067,10 @@ var app = (function () {
         }
         return bytes;
     };
-    //# sourceMappingURL=numbers.js.map
 
     var error = function (msg) {
         throw new Error(msg);
     };
-    //# sourceMappingURL=errors.js.map
 
     function createCommonjsModule(fn, module) {
     	return module = { exports: {} }, fn(module, module.exports), module.exports;
@@ -8104,7 +8097,6 @@ var app = (function () {
     var isStandardFont = function (input) {
         return StandardFontValues.includes(input);
     };
-    //# sourceMappingURL=objects.js.map
 
     /* tslint:disable:ban-types */
     var backtick = function (val) { return "`" + val + "`"; };
@@ -8219,7 +8211,6 @@ var app = (function () {
             throw new Error(backtick(valueName) + " must be a multiple of " + multiplier + ", but was actually " + value);
         }
     };
-    //# sourceMappingURL=validators.js.map
 
     var Cache = /** @class */ (function () {
         function Cache(populate) {
@@ -8237,7 +8228,6 @@ var app = (function () {
         Cache.populatedBy = function (populate) { return new Cache(populate); };
         return Cache;
     }());
-    //# sourceMappingURL=Cache.js.map
 
     var MethodNotImplementedError = /** @class */ (function (_super) {
         __extends(MethodNotImplementedError, _super);
@@ -8440,7 +8430,6 @@ var app = (function () {
         }
         return MissingKeywordError;
     }(PDFParsingError));
-    //# sourceMappingURL=errors.js.map
 
     var CharCodes;
     (function (CharCodes) {
@@ -8503,7 +8492,6 @@ var app = (function () {
         CharCodes[CharCodes["Tilde"] = 126] = "Tilde";
     })(CharCodes || (CharCodes = {}));
     var CharCodes$1 = CharCodes;
-    //# sourceMappingURL=CharCodes.js.map
 
     var PDFHeader = /** @class */ (function () {
         function PDFHeader(major, minor) {
@@ -8540,7 +8528,6 @@ var app = (function () {
         };
         return PDFHeader;
     }());
-    //# sourceMappingURL=PDFHeader.js.map
 
     var PDFObject = /** @class */ (function () {
         function PDFObject() {
@@ -8559,7 +8546,6 @@ var app = (function () {
         };
         return PDFObject;
     }());
-    //# sourceMappingURL=PDFObject.js.map
 
     var PDFArray = /** @class */ (function (_super) {
         __extends(PDFArray, _super);
@@ -8630,7 +8616,6 @@ var app = (function () {
         PDFArray.withContext = function (context) { return new PDFArray(context); };
         return PDFArray;
     }(PDFObject));
-    //# sourceMappingURL=PDFArray.js.map
 
     var ENFORCER = {};
     var PDFBool = /** @class */ (function (_super) {
@@ -8673,7 +8658,6 @@ var app = (function () {
         PDFBool.False = new PDFBool(ENFORCER, false);
         return PDFBool;
     }(PDFObject));
-    //# sourceMappingURL=PDFBool.js.map
 
     var PDFDict = /** @class */ (function (_super) {
         __extends(PDFDict, _super);
@@ -8755,7 +8739,6 @@ var app = (function () {
         };
         return PDFDict;
     }(PDFObject));
-    //# sourceMappingURL=PDFDict.js.map
 
     var IsDelimiter = new Uint8Array(256);
     IsDelimiter[CharCodes$1.LeftParen] = 1;
@@ -8768,7 +8751,6 @@ var app = (function () {
     IsDelimiter[CharCodes$1.RightCurly] = 1;
     IsDelimiter[CharCodes$1.ForwardSlash] = 1;
     IsDelimiter[CharCodes$1.Percent] = 1;
-    //# sourceMappingURL=Delimiters.js.map
 
     var IsWhitespace = new Uint8Array(256);
     IsWhitespace[CharCodes$1.Null] = 1;
@@ -8777,14 +8759,12 @@ var app = (function () {
     IsWhitespace[CharCodes$1.FormFeed] = 1;
     IsWhitespace[CharCodes$1.CarriageReturn] = 1;
     IsWhitespace[CharCodes$1.Space] = 1;
-    //# sourceMappingURL=Whitespace.js.map
 
     var IsIrregular = new Uint8Array(256);
     for (var idx = 0, len = 256; idx < len; idx++) {
         IsIrregular[idx] = IsWhitespace[idx] || IsDelimiter[idx] ? 1 : 0;
     }
     IsIrregular[CharCodes$1.Hash] = 1;
-    //# sourceMappingURL=Irregular.js.map
 
     var decodeName = function (name) {
         return name.replace(/#([\dABCDEF]{2})/g, function (_, hex) { return charFromHexCode(hex); });
@@ -8855,7 +8835,6 @@ var app = (function () {
         PDFName.Rotate = PDFName.of('Rotate');
         return PDFName;
     }(PDFObject));
-    //# sourceMappingURL=PDFName.js.map
 
     var PDFNull = /** @class */ (function (_super) {
         __extends(PDFNull, _super);
@@ -8881,7 +8860,6 @@ var app = (function () {
         return PDFNull;
     }(PDFObject));
     var PDFNull$1 = new PDFNull();
-    //# sourceMappingURL=PDFNull.js.map
 
     var PDFNumber = /** @class */ (function (_super) {
         __extends(PDFNumber, _super);
@@ -8910,7 +8888,6 @@ var app = (function () {
         PDFNumber.of = function (value) { return new PDFNumber(value); };
         return PDFNumber;
     }(PDFObject));
-    //# sourceMappingURL=PDFNumber.js.map
 
     var PDFStream = /** @class */ (function (_super) {
         __extends(PDFStream, _super);
@@ -8977,7 +8954,6 @@ var app = (function () {
         };
         return PDFStream;
     }(PDFObject));
-    //# sourceMappingURL=PDFStream.js.map
 
     var PDFRawStream = /** @class */ (function (_super) {
         __extends(PDFRawStream, _super);
@@ -9003,7 +8979,6 @@ var app = (function () {
         };
         return PDFRawStream;
     }(PDFStream));
-    //# sourceMappingURL=PDFRawStream.js.map
 
     var ENFORCER$2 = {};
     var pool$1 = new Map();
@@ -9044,7 +9019,6 @@ var app = (function () {
         };
         return PDFRef;
     }(PDFObject));
-    //# sourceMappingURL=PDFRef.js.map
 
     var PDFOperator = /** @class */ (function () {
         function PDFOperator(name, args) {
@@ -9096,7 +9070,6 @@ var app = (function () {
         };
         return PDFOperator;
     }());
-    //# sourceMappingURL=PDFOperator.js.map
 
     var PDFOperatorNames;
     (function (PDFOperatorNames) {
@@ -9183,7 +9156,6 @@ var app = (function () {
         PDFOperatorNames["EndCompatibilitySection"] = "EX";
     })(PDFOperatorNames || (PDFOperatorNames = {}));
     var Ops = PDFOperatorNames;
-    //# sourceMappingURL=PDFOperatorNames.js.map
 
     var PDFFlateStream = /** @class */ (function (_super) {
         __extends(PDFFlateStream, _super);
@@ -9210,7 +9182,6 @@ var app = (function () {
         };
         return PDFFlateStream;
     }(PDFStream));
-    //# sourceMappingURL=PDFFlateStream.js.map
 
     var PDFContentStream = /** @class */ (function (_super) {
         __extends(PDFContentStream, _super);
@@ -9265,7 +9236,6 @@ var app = (function () {
         };
         return PDFContentStream;
     }(PDFFlateStream));
-    //# sourceMappingURL=PDFContentStream.js.map
 
     var byAscendingObjectNumber = function (_a, _b) {
         var a = _a[0];
@@ -9392,7 +9362,6 @@ var app = (function () {
         PDFContext.create = function () { return new PDFContext(); };
         return PDFContext;
     }());
-    //# sourceMappingURL=PDFContext.js.map
 
     var PDFPageLeaf = /** @class */ (function (_super) {
         __extends(PDFPageLeaf, _super);
@@ -9537,7 +9506,6 @@ var app = (function () {
         };
         return PDFPageLeaf;
     }(PDFDict));
-    //# sourceMappingURL=PDFPageLeaf.js.map
 
     /**
      * PDFObjectCopier copies PDFObjects from a src context to a dest context.
@@ -9647,7 +9615,6 @@ var app = (function () {
         };
         return PDFObjectCopier;
     }());
-    //# sourceMappingURL=PDFObjectCopier.js.map
 
     /**
      * Entries should be added using the [[addEntry]] and [[addDeletedEntry]]
@@ -9765,7 +9732,6 @@ var app = (function () {
         PDFCrossRefSection.createEmpty = function () { return new PDFCrossRefSection(); };
         return PDFCrossRefSection;
     }());
-    //# sourceMappingURL=PDFCrossRefSection.js.map
 
     var PDFTrailer = /** @class */ (function () {
         function PDFTrailer(lastXRefOffset) {
@@ -9803,7 +9769,6 @@ var app = (function () {
         };
         return PDFTrailer;
     }());
-    //# sourceMappingURL=PDFTrailer.js.map
 
     var PDFTrailerDict = /** @class */ (function () {
         function PDFTrailerDict(dict) {
@@ -9831,7 +9796,6 @@ var app = (function () {
         PDFTrailerDict.of = function (dict) { return new PDFTrailerDict(dict); };
         return PDFTrailerDict;
     }());
-    //# sourceMappingURL=PDFTrailerDict.js.map
 
     var PDFObjectStream = /** @class */ (function (_super) {
         __extends(PDFObjectStream, _super);
@@ -9900,7 +9864,6 @@ var app = (function () {
         };
         return PDFObjectStream;
     }(PDFFlateStream));
-    //# sourceMappingURL=PDFObjectStream.js.map
 
     var PDFWriter = /** @class */ (function () {
         function PDFWriter(context, objectsPerTick) {
@@ -10034,7 +9997,6 @@ var app = (function () {
         };
         return PDFWriter;
     }());
-    //# sourceMappingURL=PDFWriter.js.map
 
     var PDFInvalidObject = /** @class */ (function (_super) {
         __extends(PDFInvalidObject, _super);
@@ -10062,7 +10024,6 @@ var app = (function () {
         PDFInvalidObject.of = function (data) { return new PDFInvalidObject(data); };
         return PDFInvalidObject;
     }(PDFObject));
-    //# sourceMappingURL=PDFInvalidObject.js.map
 
     var EntryType;
     (function (EntryType) {
@@ -10241,7 +10202,6 @@ var app = (function () {
         };
         return PDFCrossRefStream;
     }(PDFFlateStream));
-    //# sourceMappingURL=PDFCrossRefStream.js.map
 
     var PDFStreamWriter = /** @class */ (function (_super) {
         __extends(PDFStreamWriter, _super);
@@ -10340,7 +10300,6 @@ var app = (function () {
         };
         return PDFStreamWriter;
     }(PDFWriter));
-    //# sourceMappingURL=PDFStreamWriter.js.map
 
     var PDFHexString = /** @class */ (function (_super) {
         __extends(PDFHexString, _super);
@@ -10375,7 +10334,6 @@ var app = (function () {
         };
         return PDFHexString;
     }(PDFObject));
-    //# sourceMappingURL=PDFHexString.js.map
 
     /**
      * A note of thanks to the developers of https://github.com/foliojs/pdfkit, as
@@ -10459,7 +10417,6 @@ var app = (function () {
         StandardFontEmbedder.for = function (fontName) { return new StandardFontEmbedder(fontName); };
         return StandardFontEmbedder;
     }());
-    //# sourceMappingURL=StandardFontEmbedder.js.map
 
     /** `glyphs` should be an array of unique glyphs */
     var createCmap = function (glyphs, glyphId) {
@@ -10498,7 +10455,6 @@ var app = (function () {
         var msg = "0x" + hex + " is not a valid UTF-8 or UTF-16 codepoint.";
         throw new Error(msg);
     };
-    //# sourceMappingURL=CMap.js.map
 
     // prettier-ignore
     var makeFontFlags = function (options) {
@@ -10536,7 +10492,6 @@ var app = (function () {
         });
         return flags;
     };
-    //# sourceMappingURL=FontFlags.js.map
 
     var PDFString = /** @class */ (function (_super) {
         __extends(PDFString, _super);
@@ -10575,7 +10530,6 @@ var app = (function () {
         };
         return PDFString;
     }(PDFObject));
-    //# sourceMappingURL=PDFString.js.map
 
     /**
      * A note of thanks to the developers of https://github.com/foliojs/pdfkit, as
@@ -10797,7 +10751,6 @@ var app = (function () {
         };
         return CustomFontEmbedder;
     }());
-    //# sourceMappingURL=CustomFontEmbedder.js.map
 
     /**
      * A note of thanks to the developers of https://github.com/foliojs/pdfkit, as
@@ -10859,7 +10812,6 @@ var app = (function () {
         };
         return CustomFontSubsetEmbedder;
     }(CustomFontEmbedder));
-    //# sourceMappingURL=CustomFontSubsetEmbedder.js.map
 
     // prettier-ignore
     var MARKERS = [
@@ -10951,7 +10903,6 @@ var app = (function () {
         };
         return JpegEmbedder;
     }());
-    //# sourceMappingURL=JpegEmbedder.js.map
 
     var UPNG = {};
 
@@ -12021,7 +11972,6 @@ var app = (function () {
         PNG.load = function (pngData) { return new PNG(pngData); };
         return PNG;
     }());
-    //# sourceMappingURL=png.js.map
 
     /**
      * A note of thanks to the developers of https://github.com/foliojs/pdfkit, as
@@ -12085,7 +12035,6 @@ var app = (function () {
         };
         return PngEmbedder;
     }());
-    //# sourceMappingURL=PngEmbedder.js.map
 
     /*
      * Copyright 2012 Mozilla Foundation
@@ -12189,7 +12138,6 @@ var app = (function () {
         };
         return Stream;
     }());
-    //# sourceMappingURL=Stream.js.map
 
     /*
      * Copyright 2012 Mozilla Foundation
@@ -12333,7 +12281,6 @@ var app = (function () {
         };
         return DecodeStream;
     }());
-    //# sourceMappingURL=DecodeStream.js.map
 
     /*
      * Copyright 2012 Mozilla Foundation
@@ -12416,7 +12363,6 @@ var app = (function () {
         };
         return Ascii85Stream;
     }(DecodeStream));
-    //# sourceMappingURL=Ascii85Stream.js.map
 
     /*
      * Copyright 2012 Mozilla Foundation
@@ -12487,7 +12433,6 @@ var app = (function () {
         };
         return AsciiHexStream;
     }(DecodeStream));
-    //# sourceMappingURL=AsciiHexStream.js.map
 
     /*
      * Copyright 1996-2003 Glyph & Cog, LLC
@@ -12846,7 +12791,6 @@ var app = (function () {
         };
         return FlateStream;
     }(DecodeStream));
-    //# sourceMappingURL=FlateStream.js.map
 
     /*
      * Copyright 2012 Mozilla Foundation
@@ -12979,7 +12923,6 @@ var app = (function () {
         };
         return LZWStream;
     }(DecodeStream));
-    //# sourceMappingURL=LZWStream.js.map
 
     /*
      * Copyright 2012 Mozilla Foundation
@@ -13030,7 +12973,6 @@ var app = (function () {
         };
         return RunLengthStream;
     }(DecodeStream));
-    //# sourceMappingURL=RunLengthStream.js.map
 
     var decodeStream = function (stream, encoding, params) {
         if (encoding === PDFName.of('FlateDecode')) {
@@ -13075,7 +13017,6 @@ var app = (function () {
         }
         return stream;
     };
-    //# sourceMappingURL=decode.js.map
 
     var fullPageBoundingBox = function (page) {
         var mediaBox = page.MediaBox();
@@ -13154,7 +13095,6 @@ var app = (function () {
         };
         return PDFPageEmbedder;
     }());
-    //# sourceMappingURL=PDFPageEmbedder.js.map
 
     var PDFCatalog = /** @class */ (function (_super) {
         __extends(PDFCatalog, _super);
@@ -13190,7 +13130,6 @@ var app = (function () {
         };
         return PDFCatalog;
     }(PDFDict));
-    //# sourceMappingURL=PDFCatalog.js.map
 
     var PDFPageTree = /** @class */ (function (_super) {
         __extends(PDFPageTree, _super);
@@ -13334,7 +13273,6 @@ var app = (function () {
         };
         return PDFPageTree;
     }(PDFDict));
-    //# sourceMappingURL=PDFPageTree.js.map
 
     var IsDigit = new Uint8Array(256);
     IsDigit[CharCodes$1.Zero] = 1;
@@ -13355,7 +13293,6 @@ var app = (function () {
     for (var idx$1 = 0, len$1 = 256; idx$1 < len$1; idx$1++) {
         IsNumeric[idx$1] = IsDigit[idx$1] || IsNumericPrefix[idx$1] ? 1 : 0;
     }
-    //# sourceMappingURL=Numeric.js.map
 
     var Newline = CharCodes$1.Newline, CarriageReturn = CharCodes$1.CarriageReturn;
     // TODO: Throw error if eof is reached before finishing object parse...
@@ -13444,7 +13381,6 @@ var app = (function () {
         };
         return BaseParser;
     }());
-    //# sourceMappingURL=BaseParser.js.map
 
     // TODO: See how line/col tracking affects performance
     var ByteStream = /** @class */ (function () {
@@ -13502,7 +13438,6 @@ var app = (function () {
         };
         return ByteStream;
     }());
-    //# sourceMappingURL=ByteStream.js.map
 
     var Space = CharCodes$1.Space, CarriageReturn$1 = CharCodes$1.CarriageReturn, Newline$1 = CharCodes$1.Newline;
     var stream = [
@@ -13582,7 +13517,6 @@ var app = (function () {
         EOF2endstream: __spreadArrays([CarriageReturn$1], endstream),
         EOF3endstream: __spreadArrays([Newline$1], endstream),
     };
-    //# sourceMappingURL=Keywords.js.map
 
     // TODO: Throw error if eof is reached before finishing object parse...
     var PDFObjectParser = /** @class */ (function (_super) {
@@ -13794,7 +13728,6 @@ var app = (function () {
         };
         return PDFObjectParser;
     }(BaseParser));
-    //# sourceMappingURL=PDFObjectParser.js.map
 
     var PDFObjectStreamParser = /** @class */ (function (_super) {
         __extends(PDFObjectStreamParser, _super);
@@ -13854,7 +13787,6 @@ var app = (function () {
         PDFObjectStreamParser.forStream = function (rawStream, shouldWaitForTick) { return new PDFObjectStreamParser(rawStream, shouldWaitForTick); };
         return PDFObjectStreamParser;
     }(PDFObjectParser));
-    //# sourceMappingURL=PDFObjectStreamParser.js.map
 
     var PDFXRefStreamParser = /** @class */ (function () {
         function PDFXRefStreamParser(rawStream) {
@@ -13937,7 +13869,6 @@ var app = (function () {
         };
         return PDFXRefStreamParser;
     }());
-    //# sourceMappingURL=PDFXRefStreamParser.js.map
 
     var PDFParser = /** @class */ (function (_super) {
         __extends(PDFParser, _super);
@@ -14265,7 +14196,6 @@ var app = (function () {
         PDFParser.forBytesWithOptions = function (pdfBytes, objectsPerTick, throwOnInvalidObject) { return new PDFParser(pdfBytes, objectsPerTick, throwOnInvalidObject); };
         return PDFParser;
     }(PDFObjectParser));
-    //# sourceMappingURL=PDFParser.js.map
 
     var asPDFName = function (name) {
         return name instanceof PDFName ? name : PDFName.of(name);
@@ -14276,7 +14206,6 @@ var app = (function () {
     var asNumber = function (num) {
         return num instanceof PDFNumber ? num.value() : num;
     };
-    //# sourceMappingURL=objects.js.map
 
     var RotationTypes;
     (function (RotationTypes) {
@@ -14302,7 +14231,6 @@ var app = (function () {
             : rotation.type === Degrees ? rotation.angle
                 : error("Invalid rotation: " + JSON.stringify(rotation));
     };
-    //# sourceMappingURL=rotations.js.map
 
     /* ==================== Graphics State Operators ==================== */
     var cos = Math.cos, sin = Math.sin, tan = Math.tan;
@@ -14453,7 +14381,6 @@ var app = (function () {
             asPDFNumber(key),
         ]);
     };
-    //# sourceMappingURL=operators.js.map
 
     var ColorTypes;
     (function (ColorTypes) {
@@ -14482,7 +14409,6 @@ var app = (function () {
                 : color.type === CMYK ? setStrokingCmykColor(color.cyan, color.magenta, color.yellow, color.key)
                     : error("Invalid color: " + JSON.stringify(color));
     };
-    //# sourceMappingURL=colors.js.map
 
     // tslint:disable: max-classes-per-file
     // TODO: Include link to documentation with example
@@ -14529,7 +14455,6 @@ var app = (function () {
         }
         return RemovePageFromEmptyDocumentError;
     }(Error));
-    //# sourceMappingURL=errors.js.map
 
     // Originated from pdfkit Copyright (c) 2014 Devon Govett
     var cx = 0;
@@ -14903,7 +14828,6 @@ var app = (function () {
         return result;
     };
     var svgPathToOperators = function (path) { return apply(parse(path)); };
-    //# sourceMappingURL=svgPath.js.map
 
     var drawLinesOfText = function (lines, options) {
         var operators = [
@@ -15032,7 +14956,6 @@ var app = (function () {
             popGraphicsState(),
         ]).filter(Boolean);
     };
-    //# sourceMappingURL=operations.js.map
 
     var PageSizes = {
         '4A0': [4767.87, 6740.79],
@@ -15086,7 +15009,6 @@ var app = (function () {
         Letter: [612.0, 792.0],
         Tabloid: [792.0, 1224.0],
     };
-    //# sourceMappingURL=sizes.js.map
 
     var StandardFonts;
     (function (StandardFonts) {
@@ -15105,7 +15027,6 @@ var app = (function () {
         StandardFonts["Symbol"] = "Symbol";
         StandardFonts["ZapfDingbats"] = "ZapfDingbats";
     })(StandardFonts || (StandardFonts = {}));
-    //# sourceMappingURL=StandardFonts.js.map
 
     /**
      * Represents a PDF page that has been embedded in a [[PDFDocument]].
@@ -15194,7 +15115,6 @@ var app = (function () {
         };
         return PDFEmbeddedPage;
     }());
-    //# sourceMappingURL=PDFEmbeddedPage.js.map
 
     /**
      * Represents a font that has been embedded in a [[PDFDocument]].
@@ -15325,7 +15245,6 @@ var app = (function () {
         };
         return PDFFont;
     }());
-    //# sourceMappingURL=PDFFont.js.map
 
     /**
      * Represents an image that has been embedded in a [[PDFDocument]].
@@ -15416,7 +15335,6 @@ var app = (function () {
         };
         return PDFImage;
     }());
-    //# sourceMappingURL=PDFImage.js.map
 
     /**
      * Represents a single page of a [[PDFDocument]].
@@ -16328,7 +16246,6 @@ var app = (function () {
         };
         return PDFPage;
     }());
-    //# sourceMappingURL=PDFPage.js.map
 
     var ParseSpeeds;
     (function (ParseSpeeds) {
@@ -17299,7 +17216,6 @@ var app = (function () {
         };
         return PDFDocument;
     }());
-    //# sourceMappingURL=PDFDocument.js.map
 
     // can-promise has a crash in some versions of react native that dont have
     // standard global objects
