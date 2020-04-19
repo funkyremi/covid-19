@@ -1,4 +1,5 @@
-// import { PDFDocument, StandardFonts } from "pdf-lib";
+import { PDFDocument, StandardFonts } from "pdf-lib";
+// import QRCode from 'qrcode'
 
 function idealFontSize(font, text, maxWidth, minSize, defaultSize) {
   let currentSize = defaultSize;
@@ -9,8 +10,8 @@ function idealFontSize(font, text, maxWidth, minSize, defaultSize) {
   return textWidth > maxWidth ? null : currentSize;
 }
 
-function drawText(text, x, y, size = 11) {
-  page1.drawText(text, { x, y, size, font });
+function drawText(page, font, text, x, y, size = 11) {
+  page.drawText(text || '', { x, y, size, font });
 }
 
 async function generateQR(text) {
@@ -26,11 +27,14 @@ async function generateQR(text) {
   }
 }
 
-export async function generatePdf(profile, motif) {
-  const creationDate = new Date().toLocaleDateString("fr-FR");
-  const creationHour = new Date()
+export async function generatePdf(profile, settings) {
+  const baseTime = new Date();
+  baseTime.setMinutes(baseTime.getMinutes() - settings.createdXMinutesAgo);
+  const creationDate = baseTime.toLocaleDateString("fr-FR");
+  const creationHour = baseTime
     .toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })
     .replace(":", "h");
+
 
   const {
     prenom,
@@ -41,29 +45,28 @@ export async function generatePdf(profile, motif) {
     ville,
     codePostal
   } = profile;
-  const existingPdfBytes = await fetch("/certificate.pdf").then(res =>
+  const existingPdfBytes = await fetch("/certificate.pdf").then(res => 
     res.arrayBuffer()
   );
   const pdfDoc = await PDFDocument.load(existingPdfBytes);
   const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
   const page1 = pdfDoc.getPages()[0];
-
-  drawText(`${firstname} ${lastname}`, 123, 686);
-  drawText(birthday, 123, 661);
-  drawText(lieunaissance, 92, 638);
-  drawText(`${address} ${zipcode} ${town}`, 134, 613);
-  drawText(...motif.position);
-  drawText(
-    profile.town,
+  drawText(page1, font, `${prenom} ${nom}`, 123, 686);
+  drawText(page1, font, dateDeNaissance, 123, 661);
+  drawText(page1, font, lieuDeNaissance, 92, 638);
+  drawText(page1, font, `${addresse} ${codePostal} ${ville}`, 134, 613);
+  drawText(page1, font, ...settings.selectedReason.position);
+  drawText(page1, font, 
+    profile.ville,
     111,
     226,
-    idealFontSize(font, profile.town, 83, 7, 11) || 7
+    idealFontSize(font, profile.ville, 83, 7, 11) || 7
   );
-  drawText(profile.datesortie, 92, 200);
-  drawText(creationDate, 200, 201);
-  drawText(creationHour, 220, 201);
-  drawText("Date de création:", 464, 150, 7);
-  drawText(`${creationDate} à ${creationHour}`, 455, 144, 7);
+  drawText(page1, font, creationDate, 92, 200);
+  drawText(page1, font, creationHour.substring(0, 2), 200, 201);
+  drawText(page1, font, creationHour.substring(3, 5), 220, 201);
+  drawText(page1, font, "Date de création:", 464, 150, 7);
+  drawText(page1, font, `${creationDate} à ${creationHour}`, 455, 144, 7);
 
   const dataForQrCode = [
     `Cree le: ${creationDate} a ${creationHour}`,
@@ -72,26 +75,26 @@ export async function generatePdf(profile, motif) {
     `Naissance: ${dateDeNaissance} a ${lieuDeNaissance}`,
     `Adresse: ${addresse} ${codePostal} ${ville}`,
     `Sortie: ${creationDate} a ${creationHour}`,
-    `Motifs: ${motif.text}`
+    `Motif: ${settings.selectedReason.shortText}`
   ].join("; ");
-  const generatedQR = await generateQR(dataForQrCode);
-  const qrImage = await pdfDoc.embedPng(generatedQR);
-  page1.drawImage(qrImage, {
-    x: page1.getWidth() - 170,
-    y: 155,
-    width: 100,
-    height: 100
-  });
+  // const generatedQR = await generateQR(dataForQrCode);
+  // const qrImage = await pdfDoc.embedPng(generatedQR);
+  // page1.drawImage(qrImage, {
+  //   x: page1.getWidth() - 170,
+  //   y: 155,
+  //   width: 100,
+  //   height: 100
+  // });
 
-  pdfDoc.addPage();
+  // pdfDoc.addPage();
 
-  const page2 = pdfDoc.getPages()[1];
-  page2.drawImage(qrImage, {
-    x: 50,
-    y: page2.getHeight() - 350,
-    width: 300,
-    height: 300
-  });
+  // const page2 = pdfDoc.getPages()[1];
+  // page2.drawImage(qrImage, {
+  //   x: 50,
+  //   y: page2.getHeight() - 350,
+  //   width: 300,
+  //   height: 300
+  // });
 
   const pdfBytes = await pdfDoc.save();
 

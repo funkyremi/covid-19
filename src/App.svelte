@@ -1,9 +1,9 @@
 <script>
-  import { reasons, profileSchema } from './lib/data';
+  import { reasons, profileSchema } from "./lib/data";
   import { writable } from "svelte/store";
   import { profiles, settings } from "./lib/stores";
   import { generatePdf } from "./lib/pdf";
-  import { guid } from "./lib/utils"
+  import { guid } from "./lib/utils";
 
   profiles.useLocalStorage();
   settings.useLocalStorage();
@@ -15,14 +15,16 @@
     return selectedReason && reason.shortText === selectedReason.shortText;
   }
   function selectProfile(profile) {
-    const newProfiles = [...$profiles].map(p => ({...p, selected: false}));
-    const selectedProfileIndex = newProfiles.findIndex(p => p.id === profile.id);
+    const newProfiles = [...$profiles].map(p => ({ ...p, selected: false }));
+    const selectedProfileIndex = newProfiles.findIndex(
+      p => p.id === profile.id
+    );
     newProfiles[selectedProfileIndex].selected = true;
     profiles.update(() => newProfiles);
   }
   function handleNewProfile() {
-    const oldProfiles = [...$profiles].map(p => ({...p, selected: false}));
-    const newProfiles = [...oldProfiles, {...newProfile, selected: true}];
+    const oldProfiles = [...$profiles].map(p => ({ ...p, selected: false }));
+    const newProfiles = [...oldProfiles, { ...newProfile, selected: true }];
     profiles.update(() => newProfiles);
     createProfileWindow = false;
     newProfile = { id: guid() };
@@ -33,6 +35,18 @@
     tempProfiles.splice(index, 1);
     profiles.update(() => tempProfiles);
   }
+  async function generate(profile, settings) {
+    const pdfBlob = await generatePdf(profile, settings);
+    downloadBlob(pdfBlob, `attestation.pdf`);
+  }
+  function downloadBlob(blob, fileName) {
+    const link = document.createElement("a");
+    var url = URL.createObjectURL(blob);
+    link.href = url;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+  }
 </script>
 
 <style>
@@ -40,7 +54,8 @@
     margin-top: 10px;
   }
   main {
-    padding: 40px;
+    margin-top: 20px;
+    padding: 30px;
   }
 </style>
 
@@ -103,10 +118,10 @@
             href="javascript:void(0)"
             class="list-group-item list-group-item-action"
             class:active={activeReason($settings.selectedReason, reason)}
-            on:click={() => (settings.update(() => ({
-              ...$settings,
-              selectedReason: reason
-            })))}>
+            on:click={() => settings.update(() => ({
+                ...$settings,
+                selectedReason: reason
+              }))}>
             <i class="fas fa-{reason.faIcon}" />
             &nbsp; {reason.shortText}
           </a>
@@ -129,9 +144,10 @@
       <br />
       <button
         type="button"
-        on:click={() => generatePdf($profiles.find(p => p.selected))}
+        on:click={() => generate($profiles.find(p => p.selected), $settings)}
         class="btn btn-outline-primary btn-lg btn-block">
-        <i class="fas fa-file-pdf" />&nbsp; Générer l'attestation
+        <i class="fas fa-file-pdf" />
+        &nbsp; Générer l'attestation
       </button>
     {/if}
   </div>

@@ -4,17 +4,21 @@ import commonjs from "@rollup/plugin-commonjs";
 import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
 import url from "@rollup/plugin-url";
+import json from "rollup-plugin-json";
 
 const production = !process.env.ROLLUP_WATCH;
 
 export default {
   input: "src/main.js",
+  external: ["moment"],
   output: {
     sourcemap: true,
     format: "iife",
     name: "app",
-    file: "public/build/bundle.js"
+	file: "public/build/bundle.js",
+	globals: ['qrcode']
   },
+  external: ["buffer"],
   plugins: [
     svelte({
       // enable run-time checks when not in production
@@ -37,9 +41,26 @@ export default {
     }),
     commonjs({
       include: /node_modules/,
-      namedExports: { "node_modules/@pdf-lib/standard-fonts/es/Font.js": ["CourierCompressed"] }
+      namedExports: {}
     }),
+    json({
+      // All JSON files will be parsed by default,
+      // but you can also specifically include/exclude files
+      include: "node_modules/**",
+      // for tree-shaking, properties will be declared as
+      // variables, using either `var` or `const`
+      preferConst: true, // Default: false
 
+      // specify indentation for the generated default export —
+      // defaults to '\t'
+      indent: "  ",
+
+      // ignores indent and generates the smallest code
+      compact: true, // Default: false
+
+      // generate a named export for every property of the JSON object
+      namedExports: true // Default: true
+    }),
     // In dev mode, call `npm run start` once
     // the bundle has been generated
     !production && serve(),
