@@ -20819,7 +20819,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (66:6) {#each $profiles as profile}
+    // (69:6) {#each $profiles as profile}
     function create_each_block_2(ctx) {
     	let a;
     	let i0;
@@ -20854,15 +20854,15 @@ var app = (function () {
     			button = element("button");
     			i1 = element("i");
     			attr_dev(i0, "class", "fas fa-user");
-    			add_location(i0, file, 71, 10, 2178);
+    			add_location(i0, file, 74, 10, 2219);
     			attr_dev(i1, "class", "fas fa-times");
-    			add_location(i1, file, 76, 12, 2404);
+    			add_location(i1, file, 79, 12, 2445);
     			attr_dev(button, "class", "btn btn-light btn-sm float-right");
-    			add_location(button, file, 73, 10, 2262);
+    			add_location(button, file, 76, 10, 2303);
     			attr_dev(a, "href", "javascript:void(0)");
     			attr_dev(a, "class", "list-group-item list-group-item-action");
     			toggle_class(a, "active", /*profile*/ ctx[20].selected);
-    			add_location(a, file, 66, 8, 1979);
+    			add_location(a, file, 69, 8, 2020);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, a, anchor);
@@ -20900,14 +20900,14 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(66:6) {#each $profiles as profile}",
+    		source: "(69:6) {#each $profiles as profile}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (90:4) {#if createProfileWindow}
+    // (93:4) {#if createProfileWindow}
     function create_if_block_1(ctx) {
     	let div1;
     	let form;
@@ -20937,12 +20937,12 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Enregistrer";
     			attr_dev(button, "type", "submit");
-    			attr_dev(button, "class", "btn btn-outline-primary margin-top center-block svelte-esamuq");
-    			add_location(button, file, 101, 12, 3148);
+    			attr_dev(button, "class", "btn btn-outline-primary margin-top center-block svelte-1vqno89");
+    			add_location(button, file, 104, 12, 3189);
     			attr_dev(div0, "class", "text-center");
-    			add_location(div0, file, 100, 10, 3110);
-    			add_location(form, file, 91, 8, 2784);
-    			add_location(div1, file, 90, 6, 2770);
+    			add_location(div0, file, 103, 10, 3151);
+    			add_location(form, file, 94, 8, 2825);
+    			add_location(div1, file, 93, 6, 2811);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div1, anchor);
@@ -20994,14 +20994,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(90:4) {#if createProfileWindow}",
+    		source: "(93:4) {#if createProfileWindow}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (93:10) {#each profileSchema as field}
+    // (96:10) {#each profileSchema as field}
     function create_each_block_1(ctx) {
     	let input;
     	let input_placeholder_value;
@@ -21014,11 +21014,11 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			input = element("input");
-    			attr_dev(input, "class", "form-control margin-top svelte-esamuq");
+    			attr_dev(input, "class", "form-control margin-top svelte-1vqno89");
     			attr_dev(input, "type", "text");
     			attr_dev(input, "placeholder", input_placeholder_value = /*field*/ ctx[17].value);
     			input.required = true;
-    			add_location(input, file, 93, 12, 2888);
+    			add_location(input, file, 96, 12, 2929);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, input, anchor);
@@ -21043,14 +21043,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(93:10) {#each profileSchema as field}",
+    		source: "(96:10) {#each profileSchema as field}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (114:4) {#if $profiles.find(p => p.selected)}
+    // (117:4) {#if $profiles.find(p => p.selected)}
     function create_if_block(ctx) {
     	let div;
     	let t0;
@@ -21109,24 +21109,24 @@ var app = (function () {
     			i = element("i");
     			t10 = text("\n          Générer l'attestation");
     			attr_dev(div, "class", "list-group");
-    			add_location(div, file, 114, 6, 3420);
-    			add_location(br0, file, 130, 6, 3943);
+    			add_location(div, file, 117, 6, 3461);
+    			add_location(br0, file, 133, 6, 3984);
     			attr_dev(label, "for", "created-since");
-    			add_location(label, file, 131, 6, 3956);
+    			add_location(label, file, 134, 6, 3997);
     			attr_dev(input, "type", "range");
     			attr_dev(input, "class", "custom-range");
     			attr_dev(input, "min", "0");
     			attr_dev(input, "max", "60");
     			attr_dev(input, "step", "1");
     			attr_dev(input, "id", "created-since");
-    			add_location(input, file, 134, 6, 4121);
-    			add_location(br1, file, 142, 6, 4314);
-    			add_location(br2, file, 143, 6, 4327);
+    			add_location(input, file, 137, 6, 4162);
+    			add_location(br1, file, 145, 6, 4355);
+    			add_location(br2, file, 146, 6, 4368);
     			attr_dev(i, "class", "fas fa-file-pdf");
-    			add_location(i, file, 148, 8, 4514);
+    			add_location(i, file, 151, 8, 4555);
     			attr_dev(button, "type", "button");
     			attr_dev(button, "class", "btn btn-outline-primary btn-lg btn-block");
-    			add_location(button, file, 144, 6, 4340);
+    			add_location(button, file, 147, 6, 4381);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div, anchor);
@@ -21217,14 +21217,14 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(114:4) {#if $profiles.find(p => p.selected)}",
+    		source: "(117:4) {#if $profiles.find(p => p.selected)}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (116:8) {#each reasons as reason}
+    // (119:8) {#each reasons as reason}
     function create_each_block(ctx) {
     	let a;
     	let i;
@@ -21246,12 +21246,12 @@ var app = (function () {
     			t0 = text("\n              ");
     			t1 = text(t1_value);
     			t2 = space();
-    			attr_dev(i, "class", i_class_value = "fas fa-" + /*reason*/ ctx[14].faIcon + " svelte-esamuq");
-    			add_location(i, file, 124, 12, 3817);
+    			attr_dev(i, "class", i_class_value = "fas fa-" + /*reason*/ ctx[14].faIcon + " svelte-1vqno89");
+    			add_location(i, file, 127, 12, 3858);
     			attr_dev(a, "href", "javascript:void(0)");
     			attr_dev(a, "class", "list-group-item list-group-item-action");
     			toggle_class(a, "active", activeReason(/*$settings*/ ctx[3].selectedReason, /*reason*/ ctx[14]));
-    			add_location(a, file, 116, 10, 3489);
+    			add_location(a, file, 119, 10, 3530);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, a, anchor);
@@ -21279,7 +21279,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(116:8) {#each reasons as reason}",
+    		source: "(119:8) {#each reasons as reason}",
     		ctx
     	});
 
@@ -21332,17 +21332,17 @@ var app = (function () {
     			t4 = space();
     			if (if_block1) if_block1.c();
     			attr_dev(i, "class", "fas fa-plus");
-    			add_location(i, file, 84, 8, 2655);
+    			add_location(i, file, 87, 8, 2696);
     			attr_dev(a, "href", "javascript:void(0)");
     			attr_dev(a, "class", "list-group-item list-group-item-action");
-    			add_location(a, file, 80, 6, 2484);
+    			add_location(a, file, 83, 6, 2525);
     			attr_dev(div0, "class", "list-group");
-    			add_location(div0, file, 64, 4, 1911);
-    			add_location(br, file, 111, 4, 3364);
-    			attr_dev(div1, "class", "container");
-    			add_location(div1, file, 62, 2, 1856);
-    			attr_dev(main, "class", "svelte-esamuq");
-    			add_location(main, file, 61, 0, 1847);
+    			add_location(div0, file, 67, 4, 1952);
+    			add_location(br, file, 114, 4, 3405);
+    			attr_dev(div1, "class", "container svelte-1vqno89");
+    			add_location(div1, file, 65, 2, 1897);
+    			attr_dev(main, "class", "svelte-1vqno89");
+    			add_location(main, file, 64, 0, 1888);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");

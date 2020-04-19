@@ -57,6 +57,9 @@
     margin-top: 20px;
     padding: 30px;
   }
+  .container {
+    max-width: 600px;
+  }
 </style>
 
 <main>
