@@ -1,12 +1,9 @@
 import App from './App.svelte';
-import { motifs, profileSchema } from './data';
+import { reasons, profileSchema } from './data';
 
 const app = new App({
 	target: document.body,
-	props: {
-		motifs,
-		profileSchema,
-	}
+	props: {}
 });
 
 export default app;
