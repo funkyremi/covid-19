@@ -1,24 +1,16 @@
 <script>
-  import { reasons, profileSchema } from './data';
+  import { reasons, profileSchema } from './lib/data';
   import { writable } from "svelte/store";
-  import { profiles, settings } from "./stores";
-  import { generatePdf } from "./pdf";
-  import { guid } from "./utils"
-
-  let createProfileWindow = false;
-  let userSettings;
-  let newProfile = { id: guid() };
+  import { profiles, settings } from "./lib/stores";
+  import { generatePdf } from "./lib/pdf";
+  import { guid } from "./lib/utils"
 
   profiles.useLocalStorage();
-  profiles.subscribe(value => {});
   settings.useLocalStorage();
-  settings.subscribe(value => {
-    userSettings = value;
-  });
-  
-  function activeProfile(profile) {
-    return profile.selected;
-  }
+
+  let createProfileWindow = false;
+  let newProfile = { id: guid() };
+
   function activeReason(selectedReason, reason) {
     return selectedReason && reason.shortText === selectedReason.shortText;
   }
@@ -60,7 +52,7 @@
         <a
           href="#"
           class="list-group-item list-group-item-action"
-          class:active={activeProfile(profile)}
+          class:active={profile.selected}
           on:click={() => selectProfile(profile)}>
           <i class="fas fa-user" />
           &nbsp; {profile.prenom} {profile.nom}
@@ -110,19 +102,20 @@
           <a
             href="#"
             class="list-group-item list-group-item-action"
-            class:active={activeReason(userSettings.selectedReason, reason)}
+            class:active={activeReason($settings.selectedReason, reason)}
             on:click={() => (settings.update(() => ({
               ...$settings,
               selectedReason: reason
             })))}>
-            {reason.shortText}
+            <i class="fas fa-{reason.faIcon}" />
+            &nbsp; {reason.shortText}
           </a>
         {/each}
       </div>
 
       <br />
       <label for="created-since">
-        Attestation créée il y a {userSettings.createdXMinutesAgo} minute{userSettings.createdXMinutesAgo > 1 ? 's' : ''}
+        Attestation créée il y a {$settings.createdXMinutesAgo} minute{$settings.createdXMinutesAgo > 1 ? 's' : ''}
       </label>
       <input
         type="range"

@@ -1,12 +1,12 @@
-import { PDFDocument, StandardFonts } from 'pdf-lib';
+// import { PDFDocument, StandardFonts } from "pdf-lib";
 
-function idealFontSize (font, text, maxWidth, minSize, defaultSize) {
-  let currentSize = defaultSize
-  let textWidth = font.widthOfTextAtSize(text, defaultSize)
+function idealFontSize(font, text, maxWidth, minSize, defaultSize) {
+  let currentSize = defaultSize;
+  let textWidth = font.widthOfTextAtSize(text, defaultSize);
   while (textWidth > maxWidth && currentSize > minSize) {
-    textWidth = font.widthOfTextAtSize(text, --currentSize)
+    textWidth = font.widthOfTextAtSize(text, --currentSize);
   }
-  return (textWidth > maxWidth) ? null : currentSize
+  return textWidth > maxWidth ? null : currentSize;
 }
 
 function drawText(text, x, y, size = 11) {
@@ -15,15 +15,14 @@ function drawText(text, x, y, size = 11) {
 
 async function generateQR(text) {
   try {
-    var opts = {
-      errorCorrectionLevel: 'M',
-      type: 'image/png',
+    return await QRCode.toDataURL(text, {
+      errorCorrectionLevel: "M",
+      type: "image/png",
       quality: 0.92,
-      margin: 1,
-    }
-    return await QRCode.toDataURL(text, opts)
+      margin: 1
+    });
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
 }
 
@@ -33,8 +32,18 @@ export async function generatePdf(profile, motif) {
     .toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })
     .replace(":", "h");
 
-  const { prenom, nom, dateDeNaissance, lieuDeNaissance, addresse, ville, codePostal } = profile;
-  const existingPdfBytes = await fetch('/certificate.pdf').then(res => res.arrayBuffer());
+  const {
+    prenom,
+    nom,
+    dateDeNaissance,
+    lieuDeNaissance,
+    addresse,
+    ville,
+    codePostal
+  } = profile;
+  const existingPdfBytes = await fetch("/certificate.pdf").then(res =>
+    res.arrayBuffer()
+  );
   const pdfDoc = await PDFDocument.load(existingPdfBytes);
   const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
   const page1 = pdfDoc.getPages()[0];
@@ -44,10 +53,15 @@ export async function generatePdf(profile, motif) {
   drawText(lieunaissance, 92, 638);
   drawText(`${address} ${zipcode} ${town}`, 134, 613);
   drawText(...motif.position);
-  drawText(profile.town, 111, 226, idealFontSize(font, profile.town, 83, 7, 11) || 7);
+  drawText(
+    profile.town,
+    111,
+    226,
+    idealFontSize(font, profile.town, 83, 7, 11) || 7
+  );
   drawText(profile.datesortie, 92, 200);
-  drawText(releaseHours, 200, 201);
-  drawText(releaseMinutes, 220, 201);
+  drawText(creationDate, 200, 201);
+  drawText(creationHour, 220, 201);
   drawText("Date de création:", 464, 150, 7);
   drawText(`${creationDate} à ${creationHour}`, 455, 144, 7);
 

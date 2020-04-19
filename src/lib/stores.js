@@ -26,9 +26,5 @@ const createWritableStore = (key, startValue) => {
 export const profiles = createWritableStore("profiles", []);
 export const settings = createWritableStore("settings", {
   createdXMinutesAgo: 30,
-  selectedReason: {
-    shortText: "Sport",
-    text: `Déplacements brefs, dans la limite d'une heure quotidienne et dans un rayon maximal d'un kilomètre autour du domicile, liés soit à l'activité physique individuelle des personnes, à l'exclusion de toute pratique sportive collective et de toute proximité avec d'autres personnes, soit à la promenade avec les seules personnes regroupées dans un même domicile, soit aux besoins des animaux de compagnie.`,
-    position: ["x", 76, 345, 19]
-  }
+  selectedReason: reasons[4]
 });
