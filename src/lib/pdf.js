@@ -1,5 +1,5 @@
 import { PDFDocument, StandardFonts } from "pdf-lib";
-// import QRCode from 'qrcode';
+import QRCode from 'qrcode';
 
 function idealFontSize(font, text, maxWidth, minSize, defaultSize) {
   let currentSize = defaultSize;
@@ -76,24 +76,24 @@ export async function generatePdf(profile, settings) {
     `Sortie: ${creationDate} a ${creationHour}`,
     `Motif: ${settings.selectedReason.shortText}`
   ].join("; ");
-  // const generatedQR = await generateQR(dataForQrCode);
-  // const qrImage = await pdfDoc.embedPng(generatedQR);
-  // page1.drawImage(qrImage, {
-  //   x: page1.getWidth() - 170,
-  //   y: 155,
-  //   width: 100,
-  //   height: 100
-  // });
+  const generatedQR = await generateQR(dataForQrCode);
+  const qrImage = await pdfDoc.embedPng(generatedQR);
+  page1.drawImage(qrImage, {
+    x: page1.getWidth() - 170,
+    y: 155,
+    width: 100,
+    height: 100
+  });
 
-  // pdfDoc.addPage();
+  pdfDoc.addPage();
 
-  // const page2 = pdfDoc.getPages()[1];
-  // page2.drawImage(qrImage, {
-  //   x: 50,
-  //   y: page2.getHeight() - 350,
-  //   width: 300,
-  //   height: 300
-  // });
+  const page2 = pdfDoc.getPages()[1];
+  page2.drawImage(qrImage, {
+    x: 50,
+    y: page2.getHeight() - 350,
+    width: 300,
+    height: 300
+  });
 
   const pdfBytes = await pdfDoc.save();
 

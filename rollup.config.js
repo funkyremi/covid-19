@@ -15,10 +15,8 @@ export default {
     sourcemap: true,
     format: "iife",
     name: "app",
-	file: "docs/build/bundle.js",
-	globals: ['buffer']
+    file: "docs/build/bundle.js",
   },
-  external: ["buffer"],
   plugins: [
     svelte({
       // enable run-time checks when not in production
@@ -37,7 +35,8 @@ export default {
     // https://github.com/rollup/plugins/tree/master/packages/commonjs
     resolve({
       browser: true,
-      dedupe: ["svelte"]
+      dedupe: ["svelte"],
+      preferBuiltins: false
     }),
     commonjs({
       include: /node_modules/,
