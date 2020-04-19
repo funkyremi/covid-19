@@ -44,7 +44,7 @@ export async function generatePdf(profile, settings) {
     ville,
     codePostal
   } = profile;
-  const existingPdfBytes = await fetch("/certificate.pdf").then(res => 
+  const existingPdfBytes = await fetch("certificate.pdf").then(res => 
     res.arrayBuffer()
   );
   const pdfDoc = await PDFDocument.load(existingPdfBytes);
