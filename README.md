@@ -1,6 +1,6 @@
 # Générateur d'attestations de déplacement dérogatoire
 
-[Ouvrir l'application](https://github.com/funkyremi/covid-19)
+[Ouvrir l'application](https://funkyremi.github.io/covid-19/)
 ## Description
 
 Ce générateur se veut plus simple et rapide à utiliser que celui du gouvernement.
