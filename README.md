@@ -13,4 +13,4 @@ Ce générateur se veut plus simple et rapide à utiliser que celui du gouvernem
 
 ## Demo
 
-![Demo](./demo.png)
+![Demo](./screenshot.png)
