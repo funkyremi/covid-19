@@ -50,7 +50,7 @@
     <div class="list-group">
       {#each $profiles as profile}
         <a
-          href="#"
+          href="javascript:void(0)"
           class="list-group-item list-group-item-action"
           class:active={profile.selected}
           on:click={() => selectProfile(profile)}>
@@ -64,7 +64,7 @@
         </a>
       {/each}
       <a
-        href="#"
+        href="javascript:void(0)"
         class="list-group-item list-group-item-action"
         on:click={() => (createProfileWindow = !createProfileWindow)}>
         <i class="fas fa-plus" />
@@ -100,7 +100,7 @@
       <div class="list-group">
         {#each reasons as reason}
           <a
-            href="#"
+            href="javascript:void(0)"
             class="list-group-item list-group-item-action"
             class:active={activeReason($settings.selectedReason, reason)}
             on:click={() => (settings.update(() => ({
@@ -131,7 +131,7 @@
         type="button"
         on:click={() => generatePdf($profiles.find(p => p.selected))}
         class="btn btn-outline-primary btn-lg btn-block">
-        Générer l'attestation
+        <i class="fas fa-file-pdf" />&nbsp; Générer l'attestation
       </button>
     {/if}
   </div>

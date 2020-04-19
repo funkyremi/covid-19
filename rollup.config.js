@@ -36,7 +36,8 @@ export default {
       dedupe: ["svelte"]
     }),
     commonjs({
-      include: 'node_modules/@pdf-lib/**',
+      include: /node_modules/,
+      namedExports: { "node_modules/@pdf-lib/standard-fonts/es/Font.js": ["CourierCompressed"] }
     }),
 
     // In dev mode, call `npm run start` once
