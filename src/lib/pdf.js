@@ -74,7 +74,7 @@ export async function generatePdf(profile, settings) {
     `Naissance: ${dateDeNaissance} a ${lieuDeNaissance}`,
     `Adresse: ${addresse} ${codePostal} ${ville}`,
     `Sortie: ${creationDate} a ${creationHour}`,
-    `Motif: ${settings.selectedReason.shortText}`
+    `Motif: ${settings.selectedReason.shortText.toLowerCase()}`
   ].join("; ");
   const generatedQR = await generateQR(dataForQrCode);
   const qrImage = await pdfDoc.embedPng(generatedQR);

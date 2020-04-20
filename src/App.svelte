@@ -1,6 +1,5 @@
 <script>
   import { reasons, profileSchema } from "./lib/data";
-  import { writable } from "svelte/store";
   import { profiles, settings } from "./lib/stores";
   import { generatePdf } from "./lib/pdf";
   import { guid } from "./lib/utils";
