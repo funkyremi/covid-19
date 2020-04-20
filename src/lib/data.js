@@ -3,7 +3,7 @@ export const profileSchema = [
   { key: "nom", value: "Nom" },
   { key: "dateDeNaissance", value: "Date de naissance" },
   { key: "lieuDeNaissance", value: "Lieu de naissance" },
-  { key: "addresse", value: "Addresse" },
+  { key: "addresse", value: "Adresse" },
   { key: "ville", value: "Ville" },
   { key: "codePostal", value: "Code postal" }
 ];
