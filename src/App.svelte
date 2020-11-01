@@ -35,6 +35,7 @@
     profiles.update(() => tempProfiles);
   }
   async function generate(profile, settings) {
+    console.log(profile, settings)
     const pdfBlob = await generatePdf(profile, settings);
     downloadBlob(pdfBlob, `attestation.pdf`);
   }
@@ -71,12 +72,12 @@
           class="list-group-item list-group-item-action"
           class:active={profile.selected}
           on:click={() => selectProfile(profile)}>
-          <i class="fas fa-user" />
+          🙎‍♂️
           &nbsp; {profile.prenom} {profile.nom}
           <button
             class="btn btn-light btn-sm float-right"
             on:click|stopPropagation={() => deleteProfile(profile)}>
-            <i class="fas fa-times" />
+            🗑
           </button>
         </a>
       {/each}
@@ -84,7 +85,7 @@
         href="javascript:void(0)"
         class="list-group-item list-group-item-action"
         on:click={() => (createProfileWindow = !createProfileWindow)}>
-        <i class="fas fa-plus" />
+        ➕
         &nbsp; Nouveau profil
       </a>
     </div>
@@ -124,7 +125,7 @@
                 ...$settings,
                 selectedReason: reason
               }))}>
-            <i class="fas fa-{reason.faIcon}" />
+            {reason.icon}
             &nbsp; {reason.shortText}
           </a>
         {/each}
@@ -148,7 +149,7 @@
         type="button"
         on:click={() => generate($profiles.find(p => p.selected), $settings)}
         class="btn btn-outline-primary btn-lg btn-block">
-        <i class="fas fa-file-pdf" />
+        📄
         &nbsp; Générer l'attestation
       </button>
     {/if}
