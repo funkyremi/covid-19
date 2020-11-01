@@ -50,20 +50,20 @@ export async function generatePdf(profile, settings) {
   const pdfDoc = await PDFDocument.load(existingPdfBytes);
   const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
-  pdfDoc.setTitle('COVID-19 - Déclaration de déplacement')
-  pdfDoc.setSubject('Attestation de déplacement dérogatoire')
+  pdfDoc.setTitle("COVID-19 - Déclaration de déplacement");
+  pdfDoc.setSubject("Attestation de déplacement dérogatoire");
   pdfDoc.setKeywords([
-    'covid19',
-    'covid-19',
-    'attestation',
-    'déclaration',
-    'déplacement',
-    'officielle',
-    'gouvernement',
-  ])
-  pdfDoc.setProducer('DNUM/SDIT')
-  pdfDoc.setCreator('')
-  pdfDoc.setAuthor("Ministère de l'intérieur")
+    "covid19",
+    "covid-19",
+    "attestation",
+    "déclaration",
+    "déplacement",
+    "officielle",
+    "gouvernement",
+  ]);
+  pdfDoc.setProducer("DNUM/SDIT");
+  pdfDoc.setCreator("");
+  pdfDoc.setAuthor("Ministère de l'intérieur");
 
   const page1 = pdfDoc.getPages()[0];
 
