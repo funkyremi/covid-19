@@ -8,7 +8,9 @@
   settings.useLocalStorage();
 
   let createProfileWindow = false;
+  let editProfileWindow = false;
   let newProfile = { id: guid() };
+  let profileToEdit = {};
 
   function activeReason(selectedReason, reason) {
     return selectedReason && reason.shortText === selectedReason.shortText;
@@ -28,14 +30,23 @@
     createProfileWindow = false;
     newProfile = { id: guid() };
   }
+  function handleExistingProfile() {
+    const oldProfiles = [...$profiles].filter(p => p.id !== profileToEdit.id).map(p => ({ ...p, selected: false }));
+    const newProfiles = [...oldProfiles, { ...profileToEdit, selected: true }];
+    profiles.update(() => newProfiles);
+    editProfileWindow = false;
+  }
   function deleteProfile(profile) {
     const tempProfiles = $profiles;
     const index = tempProfiles.findIndex(p => p.id === profile.id);
     tempProfiles.splice(index, 1);
     profiles.update(() => tempProfiles);
   }
+  function editProfile(profile) {
+    editProfileWindow = true;
+    profileToEdit = profile;
+  }
   async function generate(profile, settings) {
-    console.log(profile, settings)
     const pdfBlob = await generatePdf(profile, settings);
     downloadBlob(pdfBlob, `attestation.pdf`);
   }
@@ -46,6 +57,9 @@
     link.download = fileName;
     document.body.appendChild(link);
     link.click();
+  }
+  function getProfileName(profile) {
+    return profile.intitule || `${profile.prenom} ${profile.nom}`;
   }
 </script>
 
@@ -73,11 +87,16 @@
           class:active={profile.selected}
           on:click={() => selectProfile(profile)}>
           <i class="fas fa-user" />
-          &nbsp; {profile.prenom} {profile.nom}
+          &nbsp; {getProfileName(profile)}
           <button
-            class="btn btn-light btn-sm float-right"
+            class="btn btn-light btn-sm float-right margin-left"
             on:click|stopPropagation={() => deleteProfile(profile)}>
             <i class="fas fa-times" />
+          </button>
+          <button
+            class="btn btn-light btn-sm float-right"
+            on:click|stopPropagation={() => editProfile(profile)}>
+            <i class="fas fa-edit" />
           </button>
         </a>
       {/each}
@@ -99,7 +118,29 @@
               type="text"
               bind:value={newProfile[field.key]}
               placeholder={field.value}
-              required />
+              required={field.key !== "intitule"} />
+          {/each}
+          <div class="text-center">
+            <button
+              type="submit"
+              class="btn btn-outline-primary margin-top center-block">
+              Enregistrer
+            </button>
+          </div>
+        </form>
+      </div>
+    {/if}
+
+    {#if editProfileWindow}
+      <div>
+        <form on:submit|preventDefault={handleExistingProfile}>
+          {#each profileSchema as field}
+            <input
+              class="form-control margin-top"
+              type="text"
+              bind:value={profileToEdit[field.key]}
+              placeholder={field.value}
+              required={field.key !== "intitule"} />
           {/each}
           <div class="text-center">
             <button

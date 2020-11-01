@@ -1,4 +1,5 @@
 export const profileSchema = [
+  { key: "intitule", value: "Intitulé" },
   { key: "prenom", value: "Prénom" },
   { key: "nom", value: "Nom" },
   { key: "dateDeNaissance", value: "Date de naissance" },
