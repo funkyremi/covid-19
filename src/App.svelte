@@ -5,8 +5,6 @@
   import { guid } from "./lib/utils";
   import SignaturePad from "signature_pad";
 
-
-
   profiles.useLocalStorage();
   settings.useLocalStorage();
 
