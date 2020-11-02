@@ -1,5 +1,4 @@
 export const profileSchema = [
-  { key: "intitule", value: "Intitulé" },
   { key: "prenom", value: "Prénom" },
   { key: "nom", value: "Nom" },
   { key: "dateDeNaissance", value: "Date de naissance" },
@@ -7,6 +6,7 @@ export const profileSchema = [
   { key: "addresse", value: "Adresse" },
   { key: "ville", value: "Ville" },
   { key: "codePostal", value: "Code postal" },
+  { key: "intitule", value: "Intitulé (optionnel)" },
 ];
 
 export const reasons = [

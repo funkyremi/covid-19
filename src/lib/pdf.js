@@ -103,6 +103,16 @@ export async function generatePdf(profile, settings) {
     height: 92,
   });
 
+  if (profile.signature) {
+    const signature = await pdfDoc.embedPng(profile.signature);
+    page1.drawImage(signature, {
+      x: 120,
+      y: 90,
+      width: 100,
+      height: 40,
+    });
+  }
+
   pdfDoc.addPage();
 
   const page2 = pdfDoc.getPages()[1];

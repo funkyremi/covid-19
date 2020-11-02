@@ -3,6 +3,9 @@
   import { profiles, settings } from "./lib/stores";
   import { generatePdf } from "./lib/pdf";
   import { guid } from "./lib/utils";
+  import SignaturePad from "signature_pad";
+
+
 
   profiles.useLocalStorage();
   settings.useLocalStorage();
@@ -11,6 +14,7 @@
   let editProfileWindow = false;
   let newProfile = { id: guid() };
   let profileToEdit = {};
+  let signaturePad;
 
   function activeReason(selectedReason, reason) {
     return selectedReason && reason.shortText === selectedReason.shortText;
@@ -24,6 +28,7 @@
     profiles.update(() => newProfiles);
   }
   function handleNewProfile() {
+    newProfile.signature = signaturePad.toDataURL();
     const oldProfiles = [...$profiles].map(p => ({ ...p, selected: false }));
     const newProfiles = [...oldProfiles, { ...newProfile, selected: true }];
     profiles.update(() => newProfiles);
@@ -31,6 +36,7 @@
     newProfile = { id: guid() };
   }
   function handleExistingProfile() {
+    profileToEdit.signature = signaturePad.toDataURL();
     const oldProfiles = [...$profiles].filter(p => p.id !== profileToEdit.id).map(p => ({ ...p, selected: false }));
     const newProfiles = [...oldProfiles, { ...profileToEdit, selected: true }];
     profiles.update(() => newProfiles);
@@ -43,7 +49,7 @@
     profiles.update(() => tempProfiles);
   }
   function editProfile(profile) {
-    editProfileWindow = true;
+    editProfileWindow = !editProfileWindow;
     profileToEdit = profile;
   }
   async function generate(profile, settings) {
@@ -61,11 +67,31 @@
   function getProfileName(profile) {
     return profile.intitule || `${profile.prenom} ${profile.nom}`;
   }
+  function initSignature() {
+    setTimeout(() => {
+      const canvas = document.querySelector("canvas");
+      signaturePad = new SignaturePad(canvas);
+    }, 0);
+    return '';
+  }
+  function loadSignature(profile) {
+    setTimeout(() => {
+      const canvas = document.querySelector("canvas");
+      signaturePad = new SignaturePad(canvas);
+      if (profile.signature) {
+        signaturePad.fromDataURL(profile.signature, {ratio: 1});
+      }
+    }, 0);
+    return '';
+  }
 </script>
 
 <style>
   .margin-top {
     margin-top: 10px;
+  }
+  .margin-left {
+    margin-left: 5px;
   }
   main {
     margin-top: 20px;
@@ -73,6 +99,16 @@
   }
   .container {
     max-width: 600px;
+  }
+  canvas {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+  }
+  .clickable {
+    cursor: pointer;
+  }
+  p {
+    color: #495057;
   }
 </style>
 
@@ -120,6 +156,10 @@
               placeholder={field.value}
               required={field.key !== "intitule"} />
           {/each}
+          <div class="text-center margin-top">
+            <p>Signature (optionnel)&nbsp;&nbsp;<span class="clickable" on:click={signaturePad.clear()}><i class="fas fa-undo" /></span></p>
+            <canvas>{initSignature()}</canvas>
+          </div>
           <div class="text-center">
             <button
               type="submit"
@@ -142,6 +182,10 @@
               placeholder={field.value}
               required={field.key !== "intitule"} />
           {/each}
+          <div class="text-center margin-top">
+            <p>Signature (optionnel)&nbsp;&nbsp;<span class="clickable" on:click={signaturePad.clear()}><i class="fas fa-undo" /></span></p>
+            <canvas>{loadSignature(profileToEdit)}</canvas>
+          </div>
           <div class="text-center">
             <button
               type="submit"

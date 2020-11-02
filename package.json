@@ -22,6 +22,7 @@
     "buffer": "^5.6.0",
     "pdf-lib": "^1.4.1",
     "qrcode": "1.4.3",
+    "signature_pad": "^3.0.0-beta.4",
     "sirv-cli": "^0.4.4"
   }
 }
