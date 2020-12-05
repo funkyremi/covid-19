@@ -67,21 +67,21 @@ export async function generatePdf(profile, settings) {
 
   const page1 = pdfDoc.getPages()[0];
 
-  drawText(page1, font, `${prenom} ${nom}`, 107, 657);
-  drawText(page1, font, dateDeNaissance, 107, 627);
-  drawText(page1, font, lieuDeNaissance, 240, 627);
-  drawText(page1, font, `${addresse} ${codePostal} ${ville}`, 124, 596);
+  drawText(page1, font, `${prenom} ${nom}`, 92, 702);
+  drawText(page1, font, dateDeNaissance, 92, 684);
+  drawText(page1, font, lieuDeNaissance, 214, 684);
+  drawText(page1, font, `${addresse} ${codePostal} ${ville}`, 104, 665);
 
   drawText(
     page1,
     font,
     profile.ville,
-    93,
-    122,
+    78,
+    76,
     idealFontSize(font, profile.ville, 83, 7, 11) || 7
   );
-  drawText(page1, font, `${creationDate}`, 76, 92, 11);
-  drawText(page1, font, `${creationHour}`, 246, 92, 11);
+  drawText(page1, font, `${creationDate}`, 63, 58, 11);
+  drawText(page1, font, `${creationHour}`, 227, 58, 11);
 
   drawText(page1, font, ...settings.selectedReason.position);
 
@@ -99,7 +99,7 @@ export async function generatePdf(profile, settings) {
   const qrTitle2 = 'de votre attestation numérique';
   const generatedQR = await generateQR(dataForQrCode);
   const qrImage = await pdfDoc.embedPng(generatedQR);
-  page1.drawText(qrTitle1 + '\n' + qrTitle2, { x: 415, y: 135, size: 9, font, lineHeight: 10 })
+  page1.drawText(qrTitle1 + '\n' + qrTitle2, { x: 440, y: 130, size: 6, font, lineHeight: 10 })
   page1.drawImage(qrImage, {
     x: page1.getWidth() - 156,
     y: 25,
@@ -109,8 +109,8 @@ export async function generatePdf(profile, settings) {
   if (profile.signature) {
     const signature = await pdfDoc.embedPng(profile.signature);
     page1.drawImage(signature, {
-      x: 120,
-      y: 20,
+      x: 160,
+      y: 100,
       width: 100,
       height: 40,
     });
